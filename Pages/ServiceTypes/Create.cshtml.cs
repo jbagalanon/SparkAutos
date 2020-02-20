@@ -8,7 +8,6 @@ namespace SparkAuto.Pages.ServiceTypes
         public IActionResult OnGet()
         {
             return Page();
-
         }
     }
 }
