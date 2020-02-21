@@ -7,31 +7,27 @@
 }
 
 <br />
+<br />
 <div class="border backgroundWhite">
     <div class="row">
-
         <div class="col-6">
-
             <h2 class="text-info">Service Type List</h2>
-
         </div>
-
         <div class="col-6 text-right">
-            <a asp-page="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp; Create New</a>
+            <a asp-page="Create" class="btn btn-info">
+                <i class="fas fa-plus"></i>&nbsp; Create New
+            </a>
         </div>
     </div>
-    <br>
-    
+    <br />
     <div>
-   
         @if (Model.ServiceType.Count == 0)
         {
-            <p> No Service Exists </p>
+            <p>No Service Type exists. Please create a new service type.</p>
         }
         else
         {
             <table class="table table-striped border">
-
                 <tr class="table-secondary">
                     <th>
                         @Html.DisplayNameFor(m => m.ServiceType[0].Name)
@@ -39,43 +35,34 @@
                     <th>
                         @Html.DisplayNameFor(m => m.ServiceType[0].Price)
                     </th>
-                    <th>
-
-                    </th>
-
+                    <th></th>
                 </tr>
-            
                 @foreach (var item in Model.ServiceType)
                 {
-
                     <tr>
                         <td>
                             @Html.DisplayFor(m => item.Name)
                         </td>
-                        <td style="width: 150px;">
+                        <td>
                             @Html.DisplayFor(m => item.Price)
                         </td>
-                        <td>
+                        <td style="width:150px;">
                             <div class="btn-group" role="group">
                                 <a class="btn btn-primary text-white" asp-page="Edit" asp-route-Id="@item.Id">
                                     <i class="fas fa-edit"></i>
                                 </a>
-
                                 <a class="btn btn-success text-white" asp-page="Details" asp-route-Id="@item.Id">
-                                    <i class="fas fa-list"></i> </a>
-
+                                    <i class="far fa-list-alt"></i>
+                                </a>
                                 <a class="btn btn-danger text-white" asp-page="Delete" asp-route-Id="@item.Id">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </div>
+
                         </td>
                     </tr>
                 }
-
             </table>
-
-                   
         }
     </div>
-
 </div>
