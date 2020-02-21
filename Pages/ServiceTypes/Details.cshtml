@@ -1,0 +1,50 @@
+﻿@page
+@model SparkAuto.Pages.ServiceTypes.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ServiceType</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ServiceType.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ServiceType.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ServiceType.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ServiceType.Price)
+        </dd>
+    </dl>
+</div>
+<div class="form-group row">
+    <div class="col-5 offset-2">
+        <div class="row">
+            <div class="col-6">
+                <a asp-page="Edit" asp-route-id="@Model.ServiceType.Id" class="btn btn-info form-control">Edit</a>
+            </div>
+            <div class="col-6">
+                <a asp-page="Index" class="btn btn-success form-control">Back to List</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+@*
+    <div class="form-group row">
+        <div class="col-5 offset-2">
+            <partial name="_EditAndBackToListButton"/>
+        </div>
+    </div>
+    *@
+    
+
