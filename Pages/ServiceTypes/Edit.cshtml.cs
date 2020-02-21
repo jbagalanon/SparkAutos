@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using SparkAuto.Data;
 using SparkAuto.Models;
 
-namespace SparkAuto
+namespace SparkAuto.Pages.ServiceTypes
 {
     public class EditModel : PageModel
     {
