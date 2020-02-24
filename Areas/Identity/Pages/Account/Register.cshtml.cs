@@ -117,14 +117,14 @@ namespace SparkAuto.Areas.Identity.Pages.Account
                         await _roleManager.CreateAsync(new IdentityRole(SD.AdminEndUser));
                     }
 
-                    //this is from customer SD comes from utility folder with a class of constant value
+                    //this is from customer SD comes from utility folder with a class of constant value. 
                     if (!await _roleManager.RoleExistsAsync(SD.CustomerEndUser))
                     {
                         await _roleManager.CreateAsync(new IdentityRole(SD.CustomerEndUser));
                     }
 
                     //the after the validation assign it to its designated user
-                    await _userManager.AddToRoleAsync(user, SD.AdminEndUser);
+                    await _userManager.AddToRoleAsync(user, SD.CustomerEndUser);
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
