@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using SparkAuto.Data;
+using SparkAuto.Models;
+using SparkAuto.Utility;
 
 namespace SparkAuto.Areas.Identity.Pages.Account
 {
@@ -21,19 +24,29 @@ namespace SparkAuto.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger <RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        //add this information
+        private readonly RoleManager <IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _db;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            //add this role to the pipeline located at startup
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext db)
+
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _db = db;
+            _roleManager = roleManager;
+
         }
 
         [BindProperty]
@@ -41,7 +54,7 @@ namespace SparkAuto.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
 
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+       public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public class InputModel
         {
@@ -63,8 +76,6 @@ namespace SparkAuto.Areas.Identity.Pages.Account
 
             [Required]
             public string Name { get; set; }
-
-            [Required]
             public string Address { get; set; }
             public string City { get; set; }
             public string PostalCode { get; set; }
@@ -82,13 +93,38 @@ namespace SparkAuto.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            // ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser 
+                    {
+                        //add all the additional information here
+                        UserName = Input.Email, 
+                        Email = Input.Email,
+                        Name = Input.Name,
+                        Address = Input.Address,
+                        City = Input.City,
+                        PostalCode = Input.PostalCode,
+                        PhoneNumber = Input.PhoneNumber
+                    };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    //if successful, we should have an access to database
+                    //server.SD.AdminEndUser this can be added by adding SparkAuto.Utility
+                    if (!await _roleManager.RoleExistsAsync(SD.AdminEndUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.AdminEndUser));
+                    }
+
+                    //this is from customer SD comes from utility folder with a class of constant value
+                    if (!await _roleManager.RoleExistsAsync(SD.CustomerEndUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.CustomerEndUser));
+                    }
+
+                    //the after the validation assign it to its designated user
+                    await _userManager.AddToRoleAsync(user, SD.AdminEndUser);
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

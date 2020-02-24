@@ -37,9 +37,14 @@ namespace SparkAuto
                 services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-                services.AddDefaultIdentity<IdentityUser>()
+
+            //previous information is  services.AddDefaultIdentity<IdentityUser>()
+                 services.AddIdentity<IdentityUser, IdentityRole>()
+                     .AddDefaultTokenProviders()
+                     .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
                 services.AddRazorPages().AddRazorRuntimeCompilation();
+
 
                 //companion of app.UseMvc() this code is no longer needed in latest version 
                 //services.AddMvx().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)

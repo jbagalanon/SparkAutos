@@ -16,7 +16,7 @@ namespace SparkAuto.Models
         public string PostalCode { get; set; }
 
         //push this file to database. Go to application dbcontext
-        //add all this file in register.cshtml.cs
+        //add all this file in register.cshtml.cs 
 
     }
 }
