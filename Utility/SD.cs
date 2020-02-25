@@ -10,6 +10,7 @@ namespace SparkAuto.Utility
         //Adding Constant. To be used in creating registration
         public const string AdminEndUser = "Admin";
         public const string CustomerEndUser = "Customer";
+        public const int PaginationUsersPageSize = 2;
 
     }
 }

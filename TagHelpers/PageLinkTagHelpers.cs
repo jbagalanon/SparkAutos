@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using SparkAuto.Models;
 
-namespace SparkAuto.Pages.TagHelpers
+namespace SparkAuto.TagHelpers
 {
     public class PageLinkTagHelpers
     {

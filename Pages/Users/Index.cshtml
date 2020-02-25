@@ -3,79 +3,137 @@
     file. Just change the dirctory from sparkauto its right dir. Close
     the file then open. Orig model SparkAuto.IndexModel'*@
 @page
-@using SparkAuto.Models
 @model SparkAuto.Pages.Users.IndexModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<form>
-        <br>
-        <br>
+<form method="get" asp-page="Index">
+    <br/>
+    <br/>
 
         @*create user registration*@
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Service Type List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-page="/Account/Register" asp-area="Identity"class="btn btn-info">
+                <i class="fas fa-plus"></i>&nbsp; Create New
+            </a>
+        </div>
+    </div>
+
+        @*display user index, allow 1 space*@
+<div class="border backgroundWhite">
+    @*this place for the search of the account*@
+    <div style="height: 60px;" class="container border border-secondary">
+
         <div class="row">
-            <div class="col-6">
-                <h2 class="text-info">Service Type List</h2>
+            <div class="col-11">
+                <div class="row" style="padding-top: 10px;">
+                    <div class="col-4">
+                        @Html.Editor("searchEmail", new
+                        {
+                            htmlattributes = new { @class = "form-control", placeholder = "Email" }
+
+                        });
+                    </div>
+                    <div class="col-4">
+                        @Html.Editor("searchName", new
+                        {
+                            htmlattributes = new { @class = "form-control", placeholder = "Name" }
+
+                        });
+                    </div>
+                    <div class="col-4">
+                        @Html.Editor("searchPhone", new
+                        {
+                            htmlattributes = new { @class = "form-control", placeholder = "Phone" }
+
+                        });
+                    </div>
+                </div>
             </div>
-            <div class="col-6 text-right">
-                <a asp-page="/Account/Register" asp-area="Identity"class="btn btn-info">
-                    <i class="fas fa-plus"></i>&nbsp; Create New
-                </a>
+            @*this place is for search buttons*@
+            <div class="col-1">
+                <div class="row" style="padding-top: 10px; padding-right: 20px">
+                    <button type="submit" name="submit" value="Search" class="btn btn-info" form-control>
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
             </div>
         </div>
-        @*display user index, allow 1 space*@
-    <div class="border backgroundWhite">
-        <br>
-        <table class="table table-striped border">
-            <tr class="table-secondary">
+    </div>
 
-                <th>
-                    @Html.DisplayNameFor(m => m.ApplicationUserList[0].Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(m => m.ApplicationUserList[0].PhoneNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(m => m.ApplicationUserList[0].Email)
-                </th>
-                <th>
-                  
-                </th>
+    <br />
+    <table class="table table-striped border">
+        <tr class="table-secondary">
 
-            </tr>
-            @*create a loop of the generate list above*@
+            <th>
+                @Html.DisplayNameFor(m => m.UsersListVM.ApplicationUserList[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.UsersListVM.ApplicationUserList[0].PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.UsersListVM.ApplicationUserList[0].Email)
+            </th>
+            <th>
 
-            @foreach(var item in Model.ApplicationUserList)
-            {
+            </th>
 
-              <tr>
+        </tr>
+        @*create a loop of the generate list above*@
+
+        @foreach (var item in Model.UsersListVM.ApplicationUserList)
+        {
+
+            <tr>
                 <td>
-                     @Html.DisplayFor(m => item.Name)
+                    @Html.DisplayFor(m => item.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(m => item.PhoneNumber)
                 </td>
 
-                 <td>
-                     @Html.DisplayFor(m => item.Email)
-                 </td>
+                <td>
+                    @Html.DisplayFor(m => item.Email)
+                </td>
+                <td>
 
+                    @*reserve*@
+
+                </td>
+                @*this space is for edit and delete buttons*@
                 <td>
                     <div class="btn-group" role="group">
                         <a class="btn btn-primary text-white" asp-page="Edit" asp-route-Id="@item.Id">
                             <i class="fas fa-edit"></i>
                         </a>
-                      <a class="btn btn-danger text-white" asp-page="Delete" asp-route-Id="@item.Id">
+                        <a class="btn btn-danger text-white" asp-page="Delete" asp-route-Id="@item.Id">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>
                 </td>
-              </tr>
-             }
+            </tr>
+        }
+        <tr>
+            @*this space is for pagination*@
+            <td colspan="5" class="text-right">
+                <div page-model="@Model.UsersListVM.PagingInfo" asp-action="Index" page-class="btn border"
+                     page-class-normal="btn btn-light" page-class-selected="btn btn-info active"
+                     class="btn btn-group">
 
-        </table>
-         
-    </div>   
+
+                </div>
+
+
+            </td>
+        </tr>
+
+    </table>
+
+</div>   
  </form>
