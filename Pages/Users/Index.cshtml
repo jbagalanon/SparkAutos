@@ -16,7 +16,7 @@
         @*create user registration*@
     <div class="row">
         <div class="col-6">
-            <h2 class="text-info">Service Type List</h2>
+            <h2 class="text-info">Customer List</h2>
         </div>
         <div class="col-6 text-right">
             <a asp-page="/Account/Register" asp-area="Identity"class="btn btn-info">
@@ -83,6 +83,9 @@
             <th>
 
             </th>
+            <th>
+
+            </th>
 
         </tr>
         @*create a loop of the generate list above*@
@@ -108,32 +111,30 @@
                 </td>
                 @*this space is for edit and delete buttons*@
                 <td>
-                    <div class="btn-group" role="group">
-                        <a class="btn btn-primary text-white" asp-page="Edit" asp-route-Id="@item.Id">
-                            <i class="fas fa-edit"></i>
-                        </a>
+                    <a class="btn btn-primary text-white" asp-page="Edit" asp-route-Id="@item.Id">
+                        <i class="fas fa-edit"></i>
+                    </a>
+
                         <a class="btn btn-danger text-white" asp-page="Delete" asp-route-Id="@item.Id">
                             <i class="fas fa-trash-alt"></i>
                         </a>
-                    </div>
                 </td>
             </tr>
         }
         <tr>
             @*this space is for pagination*@
-            <td colspan="5" class="text-right">
+            <td colspan="5" class="text-center">
                 <div page-model="@Model.UsersListVM.PagingInfo" asp-action="Index" page-class="btn border"
                      page-class-normal="btn btn-light" page-class-selected="btn btn-info active"
                      class="btn btn-group">
-
-
+                    
                 </div>
-
-
+                
             </td>
         </tr>
 
     </table>
 
-</div>   
- </form>
+    </div>
+    
+</form>

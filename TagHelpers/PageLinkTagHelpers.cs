@@ -49,7 +49,7 @@ namespace SparkAuto.TagHelpers
                     string url = PageModel.UrlParam.Replace(":", i.ToString());
                     tag.Attributes["href"] = url;
                     tag.AddCssClass(PageClass);
-                    tag.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected:PageClassNormal);
+                    tag.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                     tag.InnerHtml.Append(i.ToString());
                     result.InnerHtml.AppendHtml(tag);
                 }
