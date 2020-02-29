@@ -54,29 +54,32 @@ namespace SparkAuto.Pages.Users
             StringBuilder param = new StringBuilder();
             param.Append("/Users?productPage=:");
 
-            param.Append("$searchName=");
+            #region This is used for searching users
 
-            //append the value in search
+            
+            param.Append("&searchName=");
+
+            //append the value in search and it uses and andsign not  a dollar sign
             if (searchName != null)
             {
-                param.Append("$searchName=");
+                param.Append("&searchName=");
             }
 
-            param.Append("$searchEmail=");
+            param.Append("&searchEmail=");
 
             //append the value in name
             if (searchEmail != null)
             {
-                param.Append("$searchName=");
+                param.Append("&searchName=");
             }
 
 
-            param.Append("$searchPhone=");
+            param.Append("&searchPhone=");
 
             //append the value in phone
             if (searchPhone != null)
             {
-                param.Append("$searchPhone=");
+                param.Append("&searchPhone=");
             }
 
             if (searchEmail != null)
@@ -100,12 +103,13 @@ namespace SparkAuto.Pages.Users
                     }
                 }
             }
-           
 
+            #endregion
+
+
+            //remember joe, there is no semicolon fucntion
             var count = UsersListVM.ApplicationUserList.Count;
-            
-            //remember joe, there is no semicolonin fucntion
-            UsersListVM.PagingInfo =new PagingInfo()
+            UsersListVM.PagingInfo =new PagingInfo
             {
           
                 //this information wont work if you dont add info in onget
@@ -116,7 +120,7 @@ namespace SparkAuto.Pages.Users
             }
             ;
             UsersListVM.ApplicationUserList = UsersListVM.ApplicationUserList.OrderBy(p => p.Email)
-                .Skip((productPage - 1) * 2)
+                .Skip((productPage - 1) * SD.PaginationUsersPageSize)
                 .Take(SD.PaginationUsersPageSize).ToList();
                 
             return Page();
