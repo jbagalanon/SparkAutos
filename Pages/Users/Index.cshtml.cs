@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,6 +18,7 @@ using SparkAuto.Utility;
 //always fix this namespace, it must be the directory of the page
 namespace SparkAuto.Pages.Users
 {
+    [Authorize(Roles = SD.AdminEndUser)]
     public class IndexModel : PageModel
     {
 
