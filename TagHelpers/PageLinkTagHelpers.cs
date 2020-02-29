@@ -11,9 +11,8 @@ using SparkAuto.Models;
 
 namespace SparkAuto.TagHelpers
 {
-    public class PageLinkTagHelpers
-    {
-        [HtmlTargetElement("div", Attributes = "page-model")]
+  //be careful in tag helper next time. I added pagelinktag helper 2 tmes
+       [HtmlTargetElement("div", Attributes = "page-model")]
         public class PageLinkTagHelper : TagHelper
 
         {
@@ -58,5 +57,4 @@ namespace SparkAuto.TagHelpers
             }
 
         }
-    }
 }
