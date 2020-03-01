@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SparkAuto.Data;
 using Microsoft.Extensions.Configuration;
@@ -48,11 +49,30 @@ namespace SparkAuto
                 services.AddRazorPages().AddRazorRuntimeCompilation();
                 services.AddSingleton<IEmailSender, EmailSender>();
                 services.Configure<EmailOptions>(Configuration);
+                services.AddAuthentication().AddFacebook(fb =>
+                {
+                    fb.AppId = "195405251711886";
+                    fb.AppSecret = "c5e737b9771a3fd9d0acdc052299d9d9";
+                });
+
+
+
+
+
+                //services.AddAuthentication().AddFacebook(facebookOptions =>
+                //{
+                //    facebookOptions.AppId = Configuration["1954052517118860"];
+                //    facebookOptions.AppSecret = Configuration["c5e737b9771a3fd9d0acdc052299d9d9"];
+                //});
+
+
+                //old fb API
+
 
 
 
                 //companion of app.UseMvc() this code is no longer needed in latest version 
-                //services.AddMvx().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
