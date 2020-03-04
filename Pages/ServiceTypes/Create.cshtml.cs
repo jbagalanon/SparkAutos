@@ -16,18 +16,15 @@ namespace SparkAuto.Pages.ServiceTypes
         
         //access the database privately
         private  readonly ApplicationDbContext _db;
-
-        
-        //Solution for not initialized methods  in create handlers
-        [BindProperty]
-        public ServiceType ServiceType { get; set; }
-
         //initialize the database
         public CreateModel(ApplicationDbContext db)
         {
             _db = db;
         }
-        
+
+        //Solution for not initialized methods  in create handlers
+        [BindProperty]
+        public ServiceType ServiceType { get; set; }
 
         //this is for index viewing, 
        
