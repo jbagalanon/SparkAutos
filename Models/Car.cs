@@ -30,7 +30,7 @@ namespace SparkAuto.Models
 
         //Initialize the FK here
 
-        public string UserID { get; set; }
+        public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
     }

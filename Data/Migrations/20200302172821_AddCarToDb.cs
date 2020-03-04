@@ -51,7 +51,7 @@ namespace SparkAuto.Data.Migrations
                     Year = table.Column<string>(nullable: false),
                     Miles = table.Column<double>(nullable: false),
                     Color = table.Column<string>(nullable: true),
-                    UserID = table.Column<string>(nullable: true),
+              
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
