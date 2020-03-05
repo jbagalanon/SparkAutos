@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-SparkAuto-9CB43AAA-8904-4100-B30C-5ADFF315EB09</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200305163735_AddShoopinCartAndServiceHeadersandDetailsDb.cs" />
+    <Compile Remove="Data\Migrations\20200305163735_AddShoopinCartAndServiceHeadersandDetailsDb.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200305210842_AddServiceTypeHeaderAndShoppingModel.cs" />
+    <Compile Remove="Data\Migrations\20200305210842_AddServiceTypeHeaderAndShoppingModel.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="FontAwesome" Version="4.7.0" />

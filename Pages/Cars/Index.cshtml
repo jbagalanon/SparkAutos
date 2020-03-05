@@ -26,7 +26,7 @@
             <div class="row" style="padding-bottom: 40px; padding-top: 20px;">
                 <div class="col-md-3">
                     <p>
-                        <a asp-page="Create" asp-route-userId="@Model.CarAndCustVM.UserObj.Id" class="btn btn-info form-control">
+                        <a asp-page="Create" asp-route-userId="@Model.CarAndCustVM.UserObj.Id" class="btn btn-info btn-primary form-control">
                             <i class="fas fa-plus"></i>&nbsp; Add New Car
                         </a>
                     </p>
@@ -85,8 +85,11 @@
                         <th>
                             @Html.DisplayNameFor(m => m.CarAndCustVM.Cars.FirstOrDefault().Color)
                         </th>
-                        <th></th>
-
+                        
+                        @if (User.IsInRole(SD.AdminEndUser))
+                        {
+                            <th></th>
+                        }
                         <th></th>
                         <th></th>
 
@@ -106,11 +109,20 @@
                     <td>
                         @Html.DisplayFor(m => item.Color)
                     </td>
-                    <td>
-                    </td>
-                    <td>
 
+                    <td>
+                        <a class="btn btn-info text-white" asp-page="../Services/History" asp-route-Id="@item.Id">
+                            <i class="fas fa-wrench"></i> &nbsp; Service History
+                        </a>
                     </td>
+                    @if (User.IsInRole(SD.AdminEndUser))
+                    {
+                        <td>
+                            <a class="btn btn-success" asp-page="../Services/Create" asp-route-carId="@item.Id">
+                                <i class="fas fa-plus"></i> &nbsp; New Service
+                            </a>
+                        </td>
+                    }
 
                     <td>
                         <div class="btn-group" role="group">
