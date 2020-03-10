@@ -10,8 +10,8 @@ using SparkAuto.Data;
 namespace SparkAuto.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200305211552_AddShoppingCartAndServiceHeaderAndDetailsToDb")]
-    partial class AddShoppingCartAndServiceHeaderAndDetailsToDb
+    [Migration("20200309015328_AddShoppingCartServicesandServiceType")]
+    partial class AddShoppingCartServicesandServiceType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

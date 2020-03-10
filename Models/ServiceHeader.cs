@@ -13,6 +13,8 @@ namespace SparkAuto.Models
 
         public double Miles { get; set; }
 
+
+        [Required]
         public double TotalPrice { get; set; }
 
         public string Details { get; set; }

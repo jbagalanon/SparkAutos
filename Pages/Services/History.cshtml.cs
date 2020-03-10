@@ -21,12 +21,17 @@ namespace SparkAuto.Pages.Services
 
         [BindProperty]
         public List<ServiceHeader> ServiceHeader { get; set; }
+
+        public string UserId { get; set; }
         
-        public async Task OnGet(int carId)
+        public async Task OnGet (int carId)
         {
-            ServiceHeader =await  _db.ServiceHeader.Include(c => c.Car).Include(u => u.Car.ApplicationUser)
+            ServiceHeader =await  _db.ServiceHeader.Include(c => c.Car)
+                .Include(u => u.Car.ApplicationUser)
                 .Where(c => c.CarId == carId)
                 .ToListAsync();
+
+            UserId = _db.Car.Where(u => u.Id == carId).ToList().FirstOrDefault().UserId;
         }
     }
 }
