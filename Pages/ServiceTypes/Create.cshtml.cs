@@ -12,7 +12,7 @@ namespace SparkAuto.Pages.ServiceTypes
 
     [Authorize(Roles = SD.AdminEndUser)]
     public class CreateModel : PageModel
-    {
+    { 
         
         //access the database privately
         private  readonly ApplicationDbContext _db;

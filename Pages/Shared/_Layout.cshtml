@@ -46,6 +46,14 @@
                                 <a class="nav-link" asp-area="" asp-page="/Users/Index">Users</a>
                             </li>
                         }
+                        @if (User.IsInRole(SD.CustomerEndUser))
+                        {
+                          
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Cars/Index">Cars</a>
+                            </li>
+
+                        }
                     </ul>
                 </div>
             </div>

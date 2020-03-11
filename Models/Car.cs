@@ -26,12 +26,14 @@ namespace SparkAuto.Models
         [Required]
         public double Miles { get; set; }
         public string Color { get; set; }
-
+        public string UserId { get; set; }
 
         //Initialize the FK here
 
-        public string UserId { get; set; }
         [ForeignKey("UserId")]
+
+
+
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }
